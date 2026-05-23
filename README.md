@@ -17,10 +17,8 @@ MCP server for the [Younium](https://younium.com) subscription management API. E
       "command": "npx",
       "args": ["-y", "younium-mcp"],
       "env": {
-        "YOUNIUM_USERNAME": "user@yourcompany.com",
-        "YOUNIUM_PASSWORD": "your-younium-password",
         "YOUNIUM_CLIENT_ID": "your-client-id",
-        "YOUNIUM_CLIENT_SECRET": "your-client-secret"
+        "YOUNIUM_SECRET": "your-client-secret"
       }
     }
   }
@@ -37,10 +35,8 @@ MCP server for the [Younium](https://younium.com) subscription management API. E
 
 | Env var | Description |
 |---|---|
-| `YOUNIUM_USERNAME` | Your Younium login email |
-| `YOUNIUM_PASSWORD` | Your Younium password |
-| `YOUNIUM_CLIENT_ID` | OAuth2 client ID (from Younium settings) |
-| `YOUNIUM_CLIENT_SECRET` | OAuth2 client secret |
+| `YOUNIUM_CLIENT_ID` | API token client ID (from Younium → Settings → API Tokens) |
+| `YOUNIUM_SECRET` | API token secret |
 | `YOUNIUM_LEGAL_ENTITY` | *(optional)* Legal entity ID for multi-tenant setups |
 
 ## Available tools
