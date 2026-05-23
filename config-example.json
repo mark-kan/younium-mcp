@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "younium": {
+      "command": "npx",
+      "args": ["-y", "younium-mcp"],
+      "env": {
+        "YOUNIUM_USERNAME": "user@yourcompany.com",
+        "YOUNIUM_PASSWORD": "your-younium-password",
+        "YOUNIUM_CLIENT_ID": "your-client-id",
+        "YOUNIUM_CLIENT_SECRET": "your-client-secret"
+      }
+    }
+  }
+}
