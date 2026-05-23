@@ -168,9 +168,13 @@ export function loadTools(): ToolDefinition[] {
       const rawId = op.operationId ?? `${method}_${pathTemplate.replace(/[^a-zA-Z0-9]/g, "_")}`;
       let name = operationIdToName(rawId);
 
-      // Deduplicate
+      // Enforce 64-char limit then deduplicate
+      if (name.length > 64) {
+        name = name.slice(0, 64).replace(/_+$/, "");
+      }
       if (seen.has(name)) {
-        name = `${name}_${method}`;
+        const suffix = `_${method}`;
+        name = name.slice(0, 64 - suffix.length).replace(/_+$/, "") + suffix;
       }
       seen.add(name);
 
