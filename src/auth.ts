@@ -1,10 +1,10 @@
-const TOKEN_URL = "https://auth.younium.com/connect/token";
-const REFRESH_BUFFER_SECS = 60;
+const TOKEN_URL = "https://api.younium.com/auth/token";
+const REFRESH_BUFFER_SECS = 300;
 
 interface TokenResponse {
-  access_token: string;
-  expires_in: number;
-  token_type: string;
+  accessToken: string;
+  expiresIn: number;
+  refreshToken: string;
 }
 
 interface CachedToken {
@@ -26,19 +26,13 @@ export async function getToken(): Promise<string> {
     return cached.value;
   }
 
-  const body = new URLSearchParams({
-    grant_type: "password",
-    scope: "youniumapi",
-    username: getEnv("YOUNIUM_USERNAME"),
-    password: getEnv("YOUNIUM_PASSWORD"),
-    client_id: getEnv("YOUNIUM_CLIENT_ID"),
-    client_secret: getEnv("YOUNIUM_CLIENT_SECRET"),
-  });
-
   const res = await fetch(TOKEN_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: body.toString(),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      clientId: getEnv("YOUNIUM_CLIENT_ID"),
+      secret: getEnv("YOUNIUM_SECRET"),
+    }),
   });
 
   if (!res.ok) {
@@ -47,6 +41,6 @@ export async function getToken(): Promise<string> {
   }
 
   const data = (await res.json()) as TokenResponse;
-  cached = { value: data.access_token, expiresAt: now + data.expires_in };
+  cached = { value: data.accessToken, expiresAt: now + data.expiresIn };
   return cached.value;
 }

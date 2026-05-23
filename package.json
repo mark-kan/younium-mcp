@@ -1,6 +1,6 @@
 {
   "name": "younium-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCP server for the Younium subscription management API",
   "main": "dist/index.js",
   "bin": "dist/index.js",
